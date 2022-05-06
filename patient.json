@@ -1,0 +1,26 @@
+[
+    {
+        "first_name": "Sujatha",
+        "aadhar": "9676",
+        "birth_date": "2022-05-05",
+        "city_name": "Tuticorin",
+        "dateOfTest": "2022-05-04",
+        "timeOfTest": "14:51",
+        "Result": "Positive",
+        "labName": "oyqwyri",
+        "reportNo": "768987",
+        "Gender": ""
+    },
+    {
+        "first_name": "Ajitha",
+        "aadhar": "9676",
+        "birth_date": "2022-05-05",
+        "city_name": "Tuticorin",
+        "dateOfTest": "2022-05-04",
+        "timeOfTest": "14:51",
+        "Result": "Positive",
+        "labName": "oyqwyri",
+        "reportNo": "768987",
+        "Gender": ""
+    }
+]

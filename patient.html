@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RT-PCR report</title>
+</head>
+
+<body onload="fetchresult()">
+    <center>
+        <h1>RT-PCR report</h1>
+    </center>
+    <form action="http://localhost:9000/patientQuery" method="post">
+        <div>
+            <label for="PersonName">
+                Person Name :
+            </label>
+            <input type="text" name="personName" placeholder="Enter your name" id="personName">
+        </div>
+        <br>
+        <div>
+            <label for="AadharCardNo">
+                Aadhar Card No :
+            </label>
+            <input type="number" name="aadharNumber" placeholder="eg:3005 4651 3091 0987" id="aadharNumber">
+        </div>
+        <br>
+        <div>
+            <label for="dob">
+                Date Of Birth :
+            </label>
+            <input type="date" name="dob" id="dob">
+        </div>
+        <br>
+        <div>
+            <label for="city">
+                City :
+            </label>
+            <input id="cities" name="cities" type="text" placeholder="Enter your city">
+        </div>
+        <br>
+        <div>
+            <label for="doTest">
+                Date Of Test :
+            </label>
+            <input type="date" name="dateOftest" id="dateoftest">
+        </div>
+        <br>
+        <div>
+            <label for="toTest">
+                Time Of Test :
+            </label>
+            <input type="time" name="timeOftest" id="timeoftest">
+        </div><br>
+        <div>
+            <label id="result">Result :</label><br>
+            <input type="text" id="result" name="result" placeholder="Positive or Negative">
+        </div><br>
+        <div>
+            <label for="labName">
+                Lab Name :
+            </label>
+            <input type="text" name="labname" placeholder="Enter your Lab name" id="labname">
+        </div>
+        <br>
+        <div>
+            <label for="reportNo">
+                Report No :
+            </label>
+            <input type="number" name="reportno" placeholder="0900" id="reportno">
+        </div>
+        <br>
+        <div>
+            <label for="gender" id="genders">
+                Gender :
+            </label>
+            <input id="gender" name="gender" type="text">
+        </div>
+        <br>
+        <div>
+            <button type="submit" value="submit" id="submit">Submit</button>
+        </div>
+    </form>
+    <table id="table">
+        <tr>
+            <th>Person Name</th>
+            <th>Aadhar Card No</th>
+            <th>Date of birth</th>
+            <th>City</th>
+            <th>Date Of Test</th>
+            <th>Time Of Test</th>
+            <th>Result</th>
+            <th>Lab Name</th>
+            <th> Report No</th>
+            <th> Result</th>
+        </tr>
+    </table>
+    <div id="search">
+        <label for="valueTosearch">Enter Aadhar Value to search :</label>
+        <input id="searchTerm" class="form-control" placeholder="Enter Aadhar Card Number">
+        <button type="submit" value="search" id="search1">Search</button>
+    </div>
+    <script>
+        var submit = document.getElementById("submit");
+        submit.addEventListener('click', function () {
+
+            var table = document.getElementById("table");
+            var row = table.insertRow(-1);
+            var personName = row.insertCell(0);
+            var aadhar = row.insertCell(1);
+            var dob = row.insertCell(2);
+            var city = row.insertCell(3);
+            var dot = row.insertCell(4);
+            var tot = row.insertCell(5);
+            var res = row.insertCell(6);
+            var labName = row.insertCell(7);
+            var reportNo = row.insertCell(8);
+            var gender = row.insertCell(9);
+            personName.innerHTML = document.getElementById("personName").value;
+            aadhar.innerHTML = document.getElementById("aadharNumber").value;
+            dob.innerHTML = document.getElementById("dob").value;
+            city.innerHTML = document.getElementById("cities").value;
+            dot.innerHTML = document.getElementById("dateoftest").value;
+            tot.innerHTML = document.getElementById("timeoftest").value;
+            res.innerHTML = document.getElementById("result").value;
+            labName.innerHTML = document.getElementById("labname").value;
+            reportNo.innerHTML = document.getElementById("reportno").value;
+            gender.innerHTML = document.getElementById('gender').value;
+
+            return false;
+        });
+
+        var search = document.getElementById("search1");
+        search.addEventListener('click', function doSearch() {
+            var searchText = document.getElementById('searchTerm').value;
+            var targetTable = document.getElementById('table');
+            var targetTableColCount;
+            for (var rowIndex = 0; rowIndex < targetTable.rows.length; rowIndex++) {
+                var rowData = '';
+                if (rowIndex == 0) {
+                    targetTableColCount = targetTable.rows.item(rowIndex).cells.length;
+                    continue;
+                }
+                var colIndex = 1;
+                var cellText = '';
+                cellText = targetTable.rows.item(rowIndex).cells.item(colIndex).textContent;
+                rowData += cellText;
+
+                if (rowData.indexOf(searchText) == -1)
+                    targetTable.rows.item(rowIndex).style.display = 'none';
+                else
+                    targetTable.rows.item(rowIndex).style.display = 'table-row';
+            }
+        });
+        document.getElementById("table").style.display = "block";
+
+        const btn = document.getElementById('submit');
+
+        btn.addEventListener('click', function handleClick(event) {
+            event.preventDefault();
+
+            const inputs = document.querySelectorAll('#personName, #aadharNumber, #dob, #cities, #dateoftest, #timeoftest, #radio, #labname, #reportno, #gender');
+
+            inputs.forEach(input => {
+                input.value = '';
+            });
+        });
+    </script>
+
+</body>
+
+</html>
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Details</title>
+</head>
+
+<body>
+    <form action="http://localhost:8000/postquery" method="post">
+        <div>
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" placeholder="Enter First Name">
+        </div>
+        <div>
+            <label for="age"> Age</label>
+            <input id="age" name="age" type="number" placeholder="Enter Last Name">
+        </div>
+        <input type="submit" value="Hit" />
+    </form>
+</body>
+
+</html> -->
